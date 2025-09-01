@@ -19,5 +19,5 @@ jobs:
             - name: Build and push the image
               run: |
                 
-                docker build -t DockerACRPM.azurecr.io/myapp:latest .
-                docker push DockerACRPM.azurecr.io/myapp:latest
+                docker build -t dockeracrpm.azurecr.io/myapp:latest .
+                docker push dockeracrpm.azurecr.io/myapp:latest
