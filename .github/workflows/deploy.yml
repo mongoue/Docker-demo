@@ -1,3 +1,26 @@
+Today
+
+Fred  to  Everyone 7:44 AM
+good morning everyone
+
+Mr.Professor  to  Everyone 7:44 AM
+Good morning
+
+Mike Ezane  to  Everyone 8:23 AM
+CAN you record
+
+Mr.Professor  to  Everyone 8:26 AM
+git clone https://github.com/docker/getting-started-app.git
+
+Mike Ezane  to  Everyone 8:33 AM
+send the GitHub link again
+
+Mr.Professor  to  Everyone 8:33 AM
+git clone https://github.com/docker/getting-started-app.git
+https://docs.docker.com/get-started/workshop/02_our_app/
+
+Mr.Professor  to  Everyone 9:14 AM
+az ad sp create-for-rbac --name "githubactionuser" --role contributor --scopes /subscriptions/00000000/resourceGroups/demogithubaction --sdk-auth
 name: Build and Push image to ACR
 on:
     push:
@@ -13,3 +36,53 @@ jobs:
               uses: azure/login@v2
               with:
                 creds: ${{secrets.AZURE_CREDENTIALS}}
+
+Mr.Professor  to  Everyone 10:04 AM
+name: Build and Push image to ACR
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build-and-push:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout the code
+              uses: actions/checkout@v2
+            - name: Azure Login
+              uses: azure/login@v2
+              with:
+                creds: ${{secrets.AZURE_CREDENTIALS}}
+            - name: ACR login
+              run: |
+                az acr login --name mydockeracrredgistry
+            - name: Build and push the image
+              run: |
+                IMAGE_TAG = mydockeracrredgistry.azurecr.io/myapp:latest
+                docker build -t $IMAGE_TAG .
+                docker push IMAGE_TAG
+
+Mr.Professor  to  Everyone 10:11 AM
+name: Build and Push image to ACR
+on:
+    push:
+        branches:
+            - main
+jobs:
+    build-and-push:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout the code
+              uses: actions/checkout@v2
+            - name: Azure Login
+              uses: azure/login@v2
+              with:
+                creds: ${{secrets.AZURE_CREDENTIALS}}
+            - name: ACR login
+              run: |
+                az acr login --name DockerACRPM
+            - name: Build and push the image
+              run: |
+                
+                docker build -t DockerACRPM.azurecr.io/myapp:latest .
+                docker push DockerACRPM.azurecr.io/myapp:latest
