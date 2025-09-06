@@ -20,20 +20,20 @@ jobs:
 
             - name: ACR login
               run: |
-                az acr login --name mydockeracrredgistry
+                az acr login --name acrcontainerdemo1
 
             - name: Build and push the image
               run: |
                 
-                docker build -t mydockeracrredgistry.azurecr.io/myapp:${{ github.sha }} .
-                docker push mydockeracrredgistry.azurecr.io/myapp:${{ github.sha }}
+                docker build -t acrcontainerdemo1.azurecr.io/myapp:${{ github.sha }} .
+                docker push acrcontainerdemo1.azurecr.io/myapp:${{ github.sha }}
 
             - name: 'Deploy to Azure Container Instances'
               uses: 'azure/aci-deploy@v1'
               with:
-                  resource-group: docker
+                  resource-group: dockerdemo
                   dns-name-label: getstartedapp
-                  image: mydockeracrredgistry.azurecr.io/myapp:${{ github.sha }}
+                  image: acrcontainerdemo1.azurecr.io/myapp:${{ github.sha }}
                   ports: 3000
                   cpu: 1
                   memory: 1
